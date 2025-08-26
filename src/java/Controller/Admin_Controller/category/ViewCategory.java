@@ -43,6 +43,7 @@ public class ViewCategory extends HttpServlet {
         List<Category> list = CategoryProcess.INSTANCE.getAllCategories(page, pageSize, search, sort, status);
 
         request.setAttribute("ctype", ctype);
+        //search category
         request.setAttribute("search", search);
         request.setAttribute("sort", sort);
         request.setAttribute("currentPage", page);
