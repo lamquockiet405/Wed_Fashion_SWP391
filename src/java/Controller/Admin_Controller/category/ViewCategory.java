@@ -24,6 +24,7 @@ public class ViewCategory extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("admin");
+        //CheckAdmin
         if (admin == null) {
             response.sendRedirect("ErrorPage.jsp");
             return;
