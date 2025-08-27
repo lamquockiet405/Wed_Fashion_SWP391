@@ -437,7 +437,7 @@ public class DAOUsers extends DBcontext {
             return false;
         }
     }
-
+//AddAddress//
     public int AddAddress(String username, String phoneNumber, String address, int userId) { ////Checked
         int generatedId = -1;
         String sql = "INSERT INTO [dbo].[ShippingAddresses] ([username],[phoneNumber],[address] ,[status],[userId]) VALUES(?,?,?,?,?)";
