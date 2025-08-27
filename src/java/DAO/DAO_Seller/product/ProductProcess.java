@@ -292,7 +292,7 @@ public class ProductProcess extends DAO.DAO {
         }
         return product;
     }
-
+//UpdateProduct//
     public void update(String idProduct, String productName, String description) {
         String sql = "UPDATE [Products] SET [ProductName] = ?, [Description] = ? WHERE [ProductID] = ?;";
         try {
