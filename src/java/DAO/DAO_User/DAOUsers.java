@@ -585,7 +585,7 @@ public class DAOUsers extends DBcontext {
         }
         return 0;
     }
-
+//DeleteAddresss//
     public void DeleteAddress(int userId, int id) { ////Checked
 
         try {
