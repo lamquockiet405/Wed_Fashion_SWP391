@@ -23,6 +23,7 @@ public class EditInformationShop extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //check loggin
         Users user = (Users) request.getSession().getAttribute("acc");
         if (user == null || !user.getUserRole().equalsIgnoreCase("seller")) {
             response.sendRedirect(request.getContextPath() + "/LogOutController");
