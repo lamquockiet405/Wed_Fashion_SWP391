@@ -437,7 +437,7 @@ public class DAOUsers extends DBcontext {
             return false;
         }
     }
-//AddAddress//
+
     public int AddAddress(String username, String phoneNumber, String address, int userId) { ////Checked
         int generatedId = -1;
         String sql = "INSERT INTO [dbo].[ShippingAddresses] ([username],[phoneNumber],[address] ,[status],[userId]) VALUES(?,?,?,?,?)";
@@ -464,7 +464,7 @@ public class DAOUsers extends DBcontext {
         }
         return generatedId;
     }
-//ChangeStatusAddress//
+
     public void UpdateEachAddressStatus(int status, int userId, int addressId) { ////Checked
 
         try {
@@ -499,7 +499,7 @@ public class DAOUsers extends DBcontext {
         }
 
     }
-//UpdateAddress//
+
     public void UpdateAddress(String username, String phoneNumber, String address, int id) { ////Checked
         try {
             String sql = "UPDATE [ShippingAddresses] SET [username] = ?, [phoneNumber] = ?, [address] = ? WHERE id = ?";
@@ -585,7 +585,7 @@ public class DAOUsers extends DBcontext {
         }
         return 0;
     }
-//DeleteAddresss//
+
     public void DeleteAddress(int userId, int id) { ////Checked
 
         try {

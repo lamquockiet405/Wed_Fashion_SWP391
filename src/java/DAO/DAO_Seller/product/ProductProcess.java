@@ -52,7 +52,7 @@ public class ProductProcess extends DAO.DAO {
 
         return totalPages;
     }
-//SortProduct//
+
     public List<Product> getProductsByPage(int pageNumber, int pageSize, String status, String search, String sort, int shopId) {
         List<Product> productList = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT [ProductID], [ProductName], [Description], [Status], [CategoryID], [ShopId], [CreatedAt] FROM [Products] WHERE 1 = 1 AND [ShopId] = ? ");
@@ -180,7 +180,6 @@ public class ProductProcess extends DAO.DAO {
         }
         return productList;
     }
-//ChangeStatus//
     private boolean UpdateSatusProduct(String status, String idProduct) {
         boolean isUpdate = false;
         String sql = "UPDATE [Products]  SET [Status] = ?  WHERE ProductID = ?;";
@@ -292,7 +291,7 @@ public class ProductProcess extends DAO.DAO {
         }
         return product;
     }
-//UpdateProduct//
+
     public void update(String idProduct, String productName, String description) {
         String sql = "UPDATE [Products] SET [ProductName] = ?, [Description] = ? WHERE [ProductID] = ?;";
         try {
@@ -307,6 +306,7 @@ public class ProductProcess extends DAO.DAO {
             this.status = e.getMessage();
         }
     }
+
 
     private boolean hasOrderItemsForProduct(String productId) {
         String sql = "SELECT COUNT(*) FROM [OrderItems] oi "
@@ -436,7 +436,7 @@ public class ProductProcess extends DAO.DAO {
             try { this.conn.setAutoCommit(true); } catch (SQLException ignore) {}
         }
     }
-    
+
      public static void main(String[] args) {
         ProductProcess test = new ProductProcess();
         test.add("minh", "123123", 1, "a", 1);
