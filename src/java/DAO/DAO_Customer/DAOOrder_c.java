@@ -22,6 +22,7 @@ import java.util.List;
 public class DAOOrder_c extends DBcontext {
 
     public List<BillDetail> getAllBillDetails() {
+        // Initialize an empty List to store objects of type BillDetail.
         List<BillDetail> bills = new ArrayList<>();
         String sql = "SELECT * FROM OrderHistoryDetail";
         try (Connection conn = new DBcontext().getConnection();
