@@ -27,7 +27,7 @@ public class ViewProduct extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/LogOutController");
             return;
         }
-
+//SortProduct//
         try {
             Shop shop = ShopProcess.INSTANCE.read(user.getUserID());
             int pageSize = 5;
