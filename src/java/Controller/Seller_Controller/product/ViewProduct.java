@@ -55,6 +55,7 @@ public class ViewProduct extends HttpServlet {
 
             request.setAttribute("sort", sort);
             request.setAttribute("ptype", ptype);
+            //Search//
             request.setAttribute("search", search);
             request.setAttribute("productList", products);
             if (inactiveMsg.length() > 0) {
