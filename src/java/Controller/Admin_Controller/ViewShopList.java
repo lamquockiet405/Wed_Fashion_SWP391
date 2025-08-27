@@ -38,6 +38,7 @@ public class ViewShopList extends HttpServlet {
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("admin");
         if (admin != null) {
+            //checkadmin
             DAOAdmin dao = new DAOAdmin();
             List<Shops> shop = dao.GetShopList();
             List<Users> sellerUsers = dao.GetSellerUserList();
