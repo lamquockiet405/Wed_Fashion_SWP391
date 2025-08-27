@@ -94,7 +94,7 @@ public class ViewProduct extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/LogOutController");
             return;
         }
-
+//Change Status//
         try {
             String statusAction = request.getParameter("p_select");
             String[] splitData = statusAction.split("\\|");
