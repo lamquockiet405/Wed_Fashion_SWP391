@@ -52,7 +52,7 @@ public class ProductProcess extends DAO.DAO {
 
         return totalPages;
     }
-
+//SortProduct//
     public List<Product> getProductsByPage(int pageNumber, int pageSize, String status, String search, String sort, int shopId) {
         List<Product> productList = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT [ProductID], [ProductName], [Description], [Status], [CategoryID], [ShopId], [CreatedAt] FROM [Products] WHERE 1 = 1 AND [ShopId] = ? ");
