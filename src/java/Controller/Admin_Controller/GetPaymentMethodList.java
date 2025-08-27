@@ -36,6 +36,7 @@ public class GetPaymentMethodList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        //check admin
         Admin admin = (Admin) session.getAttribute("admin");
         if (admin == null) {
             response.sendRedirect("ErrorPage.jsp");
