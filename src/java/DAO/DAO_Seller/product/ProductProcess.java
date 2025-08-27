@@ -180,7 +180,7 @@ public class ProductProcess extends DAO.DAO {
         }
         return productList;
     }
-
+//ChangeStatus//
     private boolean UpdateSatusProduct(String status, String idProduct) {
         boolean isUpdate = false;
         String sql = "UPDATE [Products]  SET [Status] = ?  WHERE ProductID = ?;";
