@@ -499,7 +499,7 @@ public class DAOUsers extends DBcontext {
         }
 
     }
-
+//UpdateAddress//
     public void UpdateAddress(String username, String phoneNumber, String address, int id) { ////Checked
         try {
             String sql = "UPDATE [ShippingAddresses] SET [username] = ?, [phoneNumber] = ?, [address] = ? WHERE id = ?";
