@@ -68,7 +68,7 @@ public class DBcontext {
 
     public DBcontext() {
         this("jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=ecommerce_platform_v2",
-                "sa", "123456");
+                "sa", "123");
     }
 
     public static void main(String[] args) {
