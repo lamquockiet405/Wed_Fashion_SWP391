@@ -6,7 +6,6 @@ package Controller.Admin_Controller;
 
 import DAO.DAO_Admin.DAOAdmin;
 import Model.Admin;
-import Model.Shops;
 import Model.Users;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -15,14 +14,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  *
  * @author lenovo
  */
-@WebServlet(name = "ManageShopController", urlPatterns = {"/ManageShopURL"})
-public class ViewShopList extends HttpServlet {
+@WebServlet(name = "BanAccount", urlPatterns = {"/BanAccount"})
+public class BanAccount extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +33,23 @@ public class ViewShopList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Admin admin = (Admin) session.getAttribute("admin");
-        if (admin != null) {
-            DAOAdmin dao = new DAOAdmin();
-            List<Shops> shop = dao.GetShopList();
-            List<Users> sellerUsers = dao.GetSellerUserList();
-            request.setAttribute("UserList", sellerUsers);
-            request.setAttribute("ShopList", shop);
-            request.getRequestDispatcher("./View/AdminPage/ManageShop.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("ErrorPage.jsp");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            
+            HttpSession session = request.getSession();
+            Users acc = (Users) session.getAttribute("acc");
+              if(acc.getUserRole().equals("Admin") && acc != null){
+            Users user = new Users();
+            user.setUserID(Integer.parseInt(request.getParameter("userID")));
+            user.setStatus(request.getParameter("status"));
+
+            DAO.DAO_Admin.DAOAdmin dao = new DAOAdmin();
+            dao.UpdateAccountStatus(user);
+            response.sendRedirect("ManagerUserURL");
+              }
+              else {
+              response.sendRedirect("ErrorPage.jsp");
+              }
         }
     }
 
@@ -75,7 +79,20 @@ public class ViewShopList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        Admin admin = (Admin) session.getAttribute("admin");
+        if (admin == null) {
+            response.sendRedirect("ErrorPage.jsp");
+            return;
+        }
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        String status = request.getParameter("status");
+        Users user = new Users();
+        user.setUserID(userId);
+        user.setStatus(status);
+        DAOAdmin dao = new DAOAdmin();
+        dao.UpdateAccountStatus(user);
+        response.sendRedirect("ManagerUserURL");
     }
 
     /**

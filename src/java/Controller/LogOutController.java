@@ -2,27 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Admin_Controller;
+package Controller;
 
-import DAO.DAO_Admin.DAOAdmin;
-import Model.Admin;
-import Model.Shops;
-import Model.Users;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  *
  * @author lenovo
  */
-@WebServlet(name = "ManageShopController", urlPatterns = {"/ManageShopURL"})
-public class ViewShopList extends HttpServlet {
+@WebServlet(name = "LogOutController", urlPatterns = {"/LogOutController"})
+public class LogOutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +31,11 @@ public class ViewShopList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Admin admin = (Admin) session.getAttribute("admin");
-        if (admin != null) {
-            DAOAdmin dao = new DAOAdmin();
-            List<Shops> shop = dao.GetShopList();
-            List<Users> sellerUsers = dao.GetSellerUserList();
-            request.setAttribute("UserList", sellerUsers);
-            request.setAttribute("ShopList", shop);
-            request.getRequestDispatcher("./View/AdminPage/ManageShop.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("ErrorPage.jsp");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+          HttpSession session = request.getSession();
+        session.removeAttribute("acc");
+        response.sendRedirect(request.getContextPath()+"/homePage");
         }
     }
 

@@ -55,7 +55,8 @@ public class DBcontext {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ecommerce_platform_v2";
 
             String username = "sa";
-            String password = "123456";
+            String password = "123";
+
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
              return DriverManager.getConnection(url, username, password);
@@ -68,7 +69,7 @@ public class DBcontext {
 
     public DBcontext() {
         this("jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=ecommerce_platform_v2",
-                "sa", "123456");
+                "sa", "123");
     }
 
     public static void main(String[] args) {

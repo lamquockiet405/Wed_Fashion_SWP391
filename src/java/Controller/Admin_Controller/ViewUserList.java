@@ -6,7 +6,6 @@ package Controller.Admin_Controller;
 
 import DAO.DAO_Admin.DAOAdmin;
 import Model.Admin;
-import Model.Shops;
 import Model.Users;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -21,8 +20,8 @@ import java.util.List;
  *
  * @author lenovo
  */
-@WebServlet(name = "ManageShopController", urlPatterns = {"/ManageShopURL"})
-public class ViewShopList extends HttpServlet {
+@WebServlet(name = "ManagerUserController", urlPatterns = {"/ManagerUserURL"})
+public class ViewUserList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +34,20 @@ public class ViewShopList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Admin admin = (Admin) session.getAttribute("admin");
-        if (admin != null) {
-            DAOAdmin dao = new DAOAdmin();
-            List<Shops> shop = dao.GetShopList();
-            List<Users> sellerUsers = dao.GetSellerUserList();
-            request.setAttribute("UserList", sellerUsers);
-            request.setAttribute("ShopList", shop);
-            request.getRequestDispatcher("./View/AdminPage/ManageShop.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("ErrorPage.jsp");
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession();
+            Admin admin = (Admin) session.getAttribute("admin");
+            if (admin != null) {
+                DAOAdmin dao = new DAOAdmin();
+                List<Users> user = dao.GetUserList();
+                request.setAttribute("UserList", user);
+                request.getRequestDispatcher("./View/AdminPage/ManageUser.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("ErrorPage.jsp");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

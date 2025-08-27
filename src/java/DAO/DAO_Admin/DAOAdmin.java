@@ -114,7 +114,6 @@ public class DAOAdmin extends DAO.DBcontext {
     }
 
     public List<Shops> GetShopList() { //// Checked
-        // Using ArrayList allows dynamic operations such as adding, updating, and removing elements.
         List<Shops> list = new ArrayList<>();
         String sql = "select * from Shops ORDER BY id DESC";
         try {
