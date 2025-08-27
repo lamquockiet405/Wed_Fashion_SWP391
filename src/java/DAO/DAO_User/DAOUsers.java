@@ -464,7 +464,7 @@ public class DAOUsers extends DBcontext {
         }
         return generatedId;
     }
-
+//ChangeStatusAddress//
     public void UpdateEachAddressStatus(int status, int userId, int addressId) { ////Checked
 
         try {
