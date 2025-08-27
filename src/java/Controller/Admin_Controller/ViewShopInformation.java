@@ -40,7 +40,8 @@ public class ViewShopInformation extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
         try {
             DAO.DAO_Admin.DAOAdmin daoa = new DAOAdmin();
-            
+            // Create a DAOAdmin object to interact with Admin-related data in the database.
+
            Shops s = new Shops();
            Users u = new Users();
            s = daoa.getShopById(id);
