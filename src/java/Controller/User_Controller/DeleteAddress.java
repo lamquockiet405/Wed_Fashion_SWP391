@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author lenovo
  */
-@WebServlet(name = "UpdateAddress", urlPatterns = {"/UpdateAddress"})
-public class UpdateAddress extends HttpServlet {
+@WebServlet(name = "DeleteAddress", urlPatterns = {"/DeleteAddress"})
+public class DeleteAddress extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +37,15 @@ public class UpdateAddress extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
               int id = Integer.parseInt(request.getParameter("id"));
-             String username = request.getParameter("username");
-             String phonenumber = request.getParameter("phoneNumber");
-             String address = request.getParameter("address");
+             
               DAO.DAO_User.DAOUsers dao = new DAOUsers();
             HttpSession session = request.getSession();
             Users acc = (Users) session.getAttribute("acc");
             
-            dao.UpdateAddress(username, phonenumber, address, id);
-              request.getRequestDispatcher("/GetAddress").forward(request, response);
+            dao.DeleteAddress(acc.getUserID(), id);
+            
+             request.getRequestDispatcher("/GetAddress").forward(request, response);
+            
             
         }
     }

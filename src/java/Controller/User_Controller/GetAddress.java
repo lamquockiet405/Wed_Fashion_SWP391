@@ -5,6 +5,7 @@
 package Controller.User_Controller;
 
 import DAO.DAO_User.DAOUsers;
+import Model.ShippingAddresses;
 import Model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,13 +15,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
  * @author lenovo
  */
-@WebServlet(name = "UpdateAddress", urlPatterns = {"/UpdateAddress"})
-public class UpdateAddress extends HttpServlet {
+@WebServlet(name = "GetAddress", urlPatterns = {"/GetAddress"})
+public class GetAddress extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,16 +38,16 @@ public class UpdateAddress extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-              int id = Integer.parseInt(request.getParameter("id"));
-             String username = request.getParameter("username");
-             String phonenumber = request.getParameter("phoneNumber");
-             String address = request.getParameter("address");
-              DAO.DAO_User.DAOUsers dao = new DAOUsers();
+            DAO.DAO_User.DAOUsers dao = new DAOUsers();
             HttpSession session = request.getSession();
+            
             Users acc = (Users) session.getAttribute("acc");
             
-            dao.UpdateAddress(username, phonenumber, address, id);
-              request.getRequestDispatcher("/GetAddress").forward(request, response);
+             List<ShippingAddresses> sa = dao.GetAddressListByUserId(acc.getUserID());    
+             request.setAttribute("ShippingAddressesList", sa);
+             
+               request.getRequestDispatcher("./View/UserPage/user/profile/AddressList.jsp").forward(request, response);
+            
             
         }
     }

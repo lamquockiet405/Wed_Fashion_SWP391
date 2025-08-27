@@ -4,7 +4,10 @@
  */
 package Controller.User_Controller;
 
+import DAO.DAO_Admin.DAOAdmin;
 import DAO.DAO_User.DAOUsers;
+import Model.Payment;
+import Model.ShippingAddresses;
 import Model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,13 +17,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import java.io.PrintWriter;
+
 
 /**
  *
  * @author lenovo
  */
-@WebServlet(name = "UpdateAddress", urlPatterns = {"/UpdateAddress"})
-public class UpdateAddress extends HttpServlet {
+@WebServlet(name = "ChooseAddress", urlPatterns = {"/ChooseAddress"})
+public class ChooseAddress extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +39,7 @@ public class UpdateAddress extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-              int id = Integer.parseInt(request.getParameter("id"));
-             String username = request.getParameter("username");
-             String phonenumber = request.getParameter("phoneNumber");
-             String address = request.getParameter("address");
-              DAO.DAO_User.DAOUsers dao = new DAOUsers();
-            HttpSession session = request.getSession();
-            Users acc = (Users) session.getAttribute("acc");
-            
-            dao.UpdateAddress(username, phonenumber, address, id);
-              request.getRequestDispatcher("/GetAddress").forward(request, response);
-            
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,9 +66,24 @@ public class UpdateAddress extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        response.setContentType("application/json;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        DAOUsers daou = new DAOUsers();
+        HttpSession session = request.getSession();
+        Users acc = (Users) session.getAttribute("acc");
+
+        int addressId = Integer.parseInt(request.getParameter("confirmedAddress"));
+        daou.UpdateAllAddressStatus(0, acc.getUserID());
+        daou.UpdateEachAddressStatus(1, acc.getUserID(), addressId);
+
+      
+        response.sendRedirect("/Ecommerce_SWP/GetDataForCheckout");
+
     }
 
     /**

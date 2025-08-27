@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.User_Controller;
+package Controller.User_Controller.user;
 
 import DAO.DAO_User.DAOUsers;
 import Model.Users;
@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author lenovo
  */
-@WebServlet(name = "UpdateAddress", urlPatterns = {"/UpdateAddress"})
-public class UpdateAddress extends HttpServlet {
+@WebServlet(name = "SetAddressDefault", urlPatterns = {"/SetAddressDefault"})
+public class SetAddressDefault extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,18 +35,17 @@ public class UpdateAddress extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-              int id = Integer.parseInt(request.getParameter("id"));
-             String username = request.getParameter("username");
-             String phonenumber = request.getParameter("phoneNumber");
-             String address = request.getParameter("address");
+             int id = Integer.parseInt(request.getParameter("id"));
+             
               DAO.DAO_User.DAOUsers dao = new DAOUsers();
             HttpSession session = request.getSession();
             Users acc = (Users) session.getAttribute("acc");
             
-            dao.UpdateAddress(username, phonenumber, address, id);
-              request.getRequestDispatcher("/GetAddress").forward(request, response);
-            
+            dao.UpdateAllAddressStatus(0, acc.getUserID());
+            dao.UpdateEachAddressStatus(1, acc.getUserID(), id);
+             request.getRequestDispatcher("/GetAddress").forward(request, response);
+             
+             
         }
     }
 
