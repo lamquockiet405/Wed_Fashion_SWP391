@@ -393,7 +393,7 @@ public class ProductProcess extends DAO.DAO {
             throw new IllegalArgumentException("Delete product failed. Please try again.");
         }
     }
-
+//DeleteProduct//
     public void deleteProductForce(String productId) {
         try {
             this.conn.setAutoCommit(false);
